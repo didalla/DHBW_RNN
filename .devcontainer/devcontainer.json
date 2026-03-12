@@ -1,0 +1,17 @@
+{
+  "name": "DHBW_RNN LaTeX",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "James-Yu.latex-workshop"
+      ],
+      "settings": {
+        "latex-workshop.latex.autoBuild.run": "never",
+        "latex-workshop.view.pdf.viewer": "tab"
+      }
+    }
+  }
+}
