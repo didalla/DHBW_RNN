@@ -28,6 +28,17 @@ Alternatively, you may choose the LyX graphical editor, which allows you to use 
 
 * [LyX](https://www.lyx.org) (platform independent)
 
+### GitHub Codespaces / VS Code Dev Containers
+
+The repository includes a ready-to-use devcontainer in **`.devcontainer/`** for GitHub Codespaces and the VS Code Dev Containers extension. It installs the required LaTeX toolchain, including **TeX Live**, **latexmk**, and **Biber**, and recommends the **LaTeX Workshop** extension for editing and PDF preview.
+
+After the container has been created, open the LaTeX sources in **`LaTeX/`** and compile **`master.tex`** either with LaTeX Workshop or from a terminal:
+
+```bash
+cd LaTeX
+latexmk -pdf master.tex
+```
+
 ### Template Installation
 
 Clone/download the template or the complete GitHup repository to your local environment and unpack it to a directory of your choice. 
