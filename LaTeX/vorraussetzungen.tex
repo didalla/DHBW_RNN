@@ -15,7 +15,8 @@
         $\mathbf{W}$               & Matrix (fetter Großbuchstabe) \\
         $W_{i,j}$                   & Element in Zeile $i$, Spalte $j$ von $\mathbf{W}$ \\
         $\mathbb{R}$               & Menge der reellen Zahlen \\
-        $\mathbb{R}^n$             & $n$-dimensionaler reeller Vektorraum \\\bottomrule
+        $\mathbb{R}^n$             & $n$-dimensionaler reeller Vektorraum \\
+        $\odot$                    & Hadamard-Produkt (elementweise Multiplikation) \\\bottomrule
     \end{tabularx}
     \caption{Im Dokument verwendete mathematische Notation}
     \label{tab:notation}
@@ -73,6 +74,15 @@ Ausgabekomponente ändert, wenn die $j$-te Eingabekomponente variiert wird.
 
 Für den Spezialfall $m = 1$ reduziert sich die Jacobi-Matrix zum transponierten Gradienten:
 $\mathbf{J} = \nabla f^\top$.
+
+\subsection{Hadamard-Produkt}
+
+Das Hadamard-Produkt, symbolisiert durch $\odot$, bezeichnet die elementweise Multiplikation von zwei Matrizen oder Vektoren gleicher Dimension.
+Gegeben zwei Matrizen $\mathbf{A}, \mathbf{B} \in \mathbb{R}^{m \times n}$, ist ihr Hadamard-Produkt $\mathbf{C} = \mathbf{A} \odot \mathbf{B}$ eine Matrix aus $\mathbb{R}^{m \times n}$, deren Elemente wie folgt definiert sind:
+\begin{equation}
+    C_{i,j} = A_{i,j} \cdot B_{i,j}
+\end{equation}
+Für Vektoren $\mathbf{a}, \mathbf{b} \in \mathbb{R}^n$ berechnet sich das Hadamard-Produkt äquivalent als $c_i = a_i \cdot b_i$.
 
 % -------------------------------------------------------------------------
 
