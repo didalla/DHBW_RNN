@@ -10,9 +10,10 @@
         \textbf{Symbol} & \textbf{Bedeutung} \\\toprule
         $x$                        & Skalar (kursiver Kleinbuchstabe) \\
         $\mathbf{x}$               & Vektor (fetter Kleinbuchstabe, Spaltenvektor) \\
+        $\mathbf{x}_{i}$             & Vektorelement (i-tes Element) \\
         $\mathbf{x}^\top$          & Transponierter Zeilenvektor \\
         $\mathbf{W}$               & Matrix (fetter Großbuchstabe) \\
-        $W_{ij}$                   & Element in Zeile $i$, Spalte $j$ von $\mathbf{W}$ \\
+        $W_{i,j}$                   & Element in Zeile $i$, Spalte $j$ von $\mathbf{W}$ \\
         $\mathbb{R}$               & Menge der reellen Zahlen \\
         $\mathbb{R}^n$             & $n$-dimensionaler reeller Vektorraum \\\bottomrule
     \end{tabularx}
@@ -132,33 +133,30 @@ Das gesamte Netz realisiert damit eine parametrisierte Funktion
 $f_\theta : \mathbb{R}^n \to \mathbb{R}^m$, deren Parameter $\theta = \{\mathbf{W}^{*}, \mathbf{b}^{*}\}$
 durch Training bestimmt werden.
 
+\subsection{Verlustfunktion}
+
+Die Verlustfunktion (auch Loss-Funktion oder Kostenfunktion genannt) quantifiziert die Abweichung zwischen der vom Modell vorhergesagten Ausgabe $\mathbf{\hat{y}}$ und dem tatsächlichen Zielwert $\mathbf{y}$. Die Minimierung dieser Funktion $\mathcal{L}$ während des Trainingsprozesses ist das Hauptziel von Optimierungsalgorithmen im maschinellen Lernen \autocite{Goodfellow2016}.
+
+Abhängig von der zugrundeliegenden Problemstellung kommen üblicherweise unterschiedliche Verlustfunktionen $l$ zum Einsatz \autocite{Bishop2006}.
+
+Die allgemeine Lossfunktion für einen Datensatz mit $n$ Beispielen wird durch den Durchschnitt der Einzelfehler über alle Beispiele definiert:
+\begin{equation}
+    \mathcal{L} = \frac{1}{n} \
+    \sum_{i=1}^n l\!\left(\mathbf{\hat{y}}_i, \mathbf{y}_i\right)
+\end{equation}
+
 \subsection{Backpropagation}
 
 Der Algorithmus zur Berechnung der Gradienten in neuronalen Netzen wird als
 Backpropagation bezeichnet. Er wendet die Kettenregel der Differentialrechnung rekursiv an,
-um die partiellen Ableitungen der Verlustfunktion $\mathcal{L}$ nach allen Netzwerkparametern
+um die partiellen Ableitungen der Verlustfunktion $\mathcal{L}$ nach allen Parametern
 effizient zu berechnen.
-
-Sei $\mathbf{a}^{(l)}$ die Aktivierung der $l$-ten Schicht und $\mathbf{z}^{(l)} = \mathbf{W}^{(l)}\mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}$
-die zugehörige Voraktivierung. Der sogenannte Fehlerterm (Delta) der Schicht $l$ ist definiert als
-\begin{equation}
-    \boldsymbol{\delta}^{(l)} = \frac{\partial \mathcal{L}}{\partial \mathbf{z}^{(l)}}.
-\end{equation}
-Mithilfe der Kettenregel lässt er sich aus dem Fehlerterm der nachfolgenden Schicht $l+1$
-rückwärts propagieren:
-\begin{equation}
-    \boldsymbol{\delta}^{(l)} =
-    \left(\mathbf{W}^{(l+1)}\right)^\top \boldsymbol{\delta}^{(l+1)} \odot \sigma'\!\left(\mathbf{z}^{(l)}\right),
-\end{equation}
-wobei $\odot$ das elementweise Produkt bezeichnet.
-Die Gradienten nach den Gewichten ergeben sich dann zu
-$\frac{\partial \mathcal{L}}{\partial \mathbf{W}^{(l)}} = \boldsymbol{\delta}^{(l)} \left(\mathbf{a}^{(l-1)}\right)^\top$.
 
 In der Praxis wird Backpropagation mit einem Gradientenabstiegsverfahren kombiniert.
 Beim stochastischen Gradientenabstieg (\textit{Stochastic Gradient Descent}, SGD) werden
 die Parameter nach jedem Mini-Batch aktualisiert:
 \begin{equation}
-    \theta \leftarrow \theta - \eta \, \nabla_\theta \mathcal{L},
+    (\mathbf{W}, \mathbf{b}) \leftarrow (\mathbf{W}, \mathbf{b}) - \eta \, \nabla_{(\mathbf{W}, \mathbf{b})} \mathcal{L}
 \end{equation}
 wobei $\eta > 0$ die Lernrate ist.
-// TODO: Fact-Check Formeln
+// TODO: Weitere Informationen im Abschnitt anfügen
