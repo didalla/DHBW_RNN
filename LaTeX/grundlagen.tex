@@ -19,6 +19,8 @@ Dabei ist $\mathbf{W}_{o,h}$ die Gewichtsmatrix für die Ausgabe, $\mathbf{b}_o$
 \section[Rückwärtspropagation in der Zeit (BPTT)]{Rückwärtspropagation in der Zeit (\texorpdfstring{\acs{BPTT}}{BPTT})}
 Das Training von \acs{RNN} erfolgt typischerweise mittels einer spezialisierten Form der Backpropagation, die als \acs{BPTT} bezeichnet wird \autocite{d2l}. Die zugrundeliegende Idee der generellen Fehler-Backpropagation wurde insbesondere durch die Publikationen von Rumelhart et al. etabliert \autocite{Rumelhart1986}, während das \acs{BPTT}-Verfahren von Werbos detailliert für rekurrente Netzwerke mathematisch hergeleitet und formuliert wurde \autocite{Werbos1990}. Bei \acs{BPTT} wird das rekurrente Netz über die gesamte Länge der Sequenz entfaltet (unrolled). Das entfaltete Netz kann man sich als ein tiefes Feedforward-Netz vorstellen, bei dem jede Schicht einem definierten Zeitschritt entspricht.
 
+% TODO: Quellen und Formulierung des Abschnitts noch einmal fachlich gegenpruefen
+
 Nachdem in einem Vorwärtsdurchlauf alle Zustände und Ausgaben berechnet wurden, wandert der Fehlergradient beim \acs{BPTT}-Verfahren von den späten Zeitschritten rückwärts durch die Zeit zu den früheren Zeitschritten. 
 
 Die allgemeine Lossfunktion über eine Sequenz von Länge $T$ wird durch den Durchschnitt der Einzelfehler über alle Zeitschritte definiert:
@@ -31,3 +33,5 @@ Die einzelnen Parameter des Netzwerks (z.\,B. $\mathbf{W}_{h,x}, \mathbf{W}_{h,h
 \begin{equation}
 \frac{\partial \mathcal{L}}{\partial \mathbf{o}_t} = \frac{\partial l(\mathbf{o}_t, \mathbf{y}_t)}{T \cdot \partial \mathbf{o}_t}
 \end{equation}
+
+% TODO: Abschnitt weiter ausarbeiten
