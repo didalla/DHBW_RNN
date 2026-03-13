@@ -1,4 +1,11 @@
 \chapter{Probleme einfacher Rekurrenter Neuronaler Netze}
-\label{ch:probleme}
 
-% TODO: Vanishing and Exploding Gradients etc.
+Beim Training von künstlichen neuronalen Netzen mittels \ac{BPTT} wird der Fehlergradient von der Ausgabeschicht durch die Zeit in die Vergangenheit zurückgeführt, um die Gewichte des Netzes anzupassen. Bei einfachen rekurrenten Netzen führt dies bei langen Eingabesequenzen zu erheblichen Schwierigkeiten beim Erlernen von weitreichenden Abhängigkeiten \autocite{Bengio1994}.
+
+\section{Verschwindende Gradienten}
+
+Das Problem der verschwindenden Gradienten (engl. \textit{Vanishing Gradients}) tritt auf, wenn die Ableitungen der Aktivierungsfunktionen sowie die Gewichte in der rekurrenten Schicht klein sind. Bei der \ac{BPTT} wird der Gradient mit jedem Zeitschritt, den er in die Vergangenheit zurückfließt, durch Kettenregel-Multiplikationen skaliert. Sind diese Faktoren überwiegend kleiner als eins, schrumpft der Gradient exponentiell mit der Sequenzlänge. Dies hat zur Folge, dass das Netz keine weitreichenden zeitlichen Abhängigkeiten erlernen kann, da der Beitrag weit zurückliegender Eingaben zur Fehlerminimierung nahezu null wird \autocite{Hochreiter1991,Bengio1994}.
+
+\section{Explodierende Gradienten}
+
+Im Gegensatz dazu kommt es zum Problem der explodierenden Gradienten (engl. \textit{Exploding Gradients}), wenn die Gewichtsmatrizen große Eigenwerte besitzen. Die wiederholte Multiplikation der Gradienten über viele Zeitschritte führt in diesem Fall zu einem exponentiellen Wachstum. Dies verursacht extrem große und unkontrollierte Aktualisierungen der Gewichte während des Optimierungsprozesses, was das Training stark destabilisiert und im schlimmsten Fall zu numerischen Überläufen (\ac{NaN}) führt \autocite{Pascanu2013}.
