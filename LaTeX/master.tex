@@ -24,7 +24,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[fontsize=12pt,BCOR=5mm,DIV=12,parskip=half,listof=totoc,
-               paper=a4,toc=bibliography,pointlessnumbers]{scrreprt}
+               paper=a4,toc=bibliography,numbers=noenddot]{scrreprt}
                
 \usepackage[utf8]{inputenc}
 
@@ -67,25 +67,30 @@
 %
 \usepackage[backend=biber, autocite=inline, style=numeric]{biblatex} 	
 \usepackage{makeidx}                  % allows index generation
+\usepackage{amsmath}                  % math environments and \dfrac, \operatorname, etc.
+\usepackage{amssymb}                  % \mathbb, \mathcal, etc.
 \usepackage{listings}	                %Format Listings properly
 \usepackage{lipsum}                   % Blindtext
 \usepackage{graphicx}                 % use various graphics formats
 \usepackage[german]{varioref}         % nicer references \vref
 \usepackage{caption}	                % better Captions
 \usepackage{booktabs}                 % nicer Tabs
-\usepackage[hidelinks=true]{hyperref} % keine roten Markierungen bei Links
+\usepackage[hidelinks]{hyperref} % keine roten Markierungen bei Links
 \usepackage{fnpct}                    % Correct superscripts 
 \usepackage{calc}                     % Used for extra space below footsepline, in particular
 \usepackage{array}
+\usepackage{tabularx}                 % full-width tables
 \usepackage{acronym}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{setspace}
 \usepackage{tocloft}
+\usepackage{scrhack}
 \usepackage[T1]{fontenc}
 
 % Definitionen und Commands
 \newcommand{\indextype}{numeric}
+\newcommand{\position}{inline}
 \newcommand{\abs}{\par\vskip 0.2cm\goodbreak\noindent}
 \newcommand{\nl}{\par\noindent}
 \newcommand{\mcl}[1]{\mathcal{#1}}
@@ -136,19 +141,19 @@
 %
 % PERSÖNLICHE ANGABEN (BITTE VOLLSTÄNDIG EINGEBEN zwischen den Klammern: {...})
 %
-\ArtDerArbeit{<Bachelor>/<Projekt>} % "Bachelor" oder "Projekt" wählen
-\TitelDerArbeit{<Titel Ihrer Arbeit>}
-\AutorDerArbeit{<Ihr Vor- und Nachname>}
-\Abteilung{<Ihre Abteilung>}
-\Firma{<Ihre Firma>}
-\Kurs{<Ihr Kurs>}
-\Studienrichtung{<Ihre Studienrichtung>}
-\Matrikelnummer{<Ihre Martikelnummer>}
-\Studiengangsleiter{<Ihr Studiengangsleiter>}
-\WissBetreuer{<Ihr(e) wissenschaftliche(r) Betreuer(in)>}
-\FirmenBetreuer{<Ihr(e) Firmenbetreuer(in)>}
-\Bearbeitungszeitraum{dd.mm.yyyy -- DD.MM.YYYY}
-\Abgabedatum{dd.mm.yyyy}
+\ArtDerArbeit{Projekt} % "Bachelor" oder "Projekt" wählen
+\TitelDerArbeit{Rekurrente Neuronale Netze}
+\AutorDerArbeit{Luke Vierfuß und Sebastian Höfling}
+\Abteilung{-}
+\Firma{Fresenius SE \& Co. KGaA. und DATEV eG}
+\Kurs{WDSKI25A}
+\Studienrichtung{Data Science und Künstliche Intelligenz}
+\Matrikelnummer{1091660 und 6043131}
+\Studiengangsleiter{Prof. Dr.-Ing. Pfisterer}
+\WissBetreuer{-}
+\FirmenBetreuer{-}
+\Bearbeitungszeitraum{04.05.2026 -- 23.05.2026}
+\Abgabedatum{23.05.2026}
 
 \begin{document}
 
@@ -238,10 +243,10 @@
 %
 % Einleitung
 \input{introduction}
+\input{vorraussetzungen}
+\input{hinleitung}
 
 % mehrere Grundlagen- und Forschungs-Kapitel
-\input{chapter1}
-\input{chapter2}
 
 % Fazit und Ausblick
 \input{conclusion}
@@ -254,8 +259,6 @@
 %        die nachfolgenden Zeilen deaktivieren, wenn keine Anhänge verwendet werden
 %
 \initializeAppendix
-\input{appendix1}
-\input{appendix2}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \singlespacing

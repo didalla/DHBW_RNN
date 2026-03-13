@@ -1,0 +1,164 @@
+\chapter{Voraussetzungen}
+
+\section{Grundlagen der Mathematik}
+
+\subsection{Notation}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{lX}
+        \textbf{Symbol} & \textbf{Bedeutung} \\\toprule
+        $x$                        & Skalar (kursiver Kleinbuchstabe) \\
+        $\mathbf{x}$               & Vektor (fetter Kleinbuchstabe, Spaltenvektor) \\
+        $\mathbf{x}^\top$          & Transponierter Zeilenvektor \\
+        $\mathbf{W}$               & Matrix (fetter Großbuchstabe) \\
+        $W_{ij}$                   & Element in Zeile $i$, Spalte $j$ von $\mathbf{W}$ \\
+        $\mathbb{R}$               & Menge der reellen Zahlen \\
+        $\mathbb{R}^n$             & $n$-dimensionaler reeller Vektorraum \\\bottomrule
+    \end{tabularx}
+    \caption{Im Dokument verwendete mathematische Notation}
+    \label{tab:notation}
+\end{table}
+
+\subsection{Partielle Ableitung}
+
+Gegeben eine Funktion $f : \mathbb{R}^n \to \mathbb{R}$, die von mehreren Variablen
+$x_1, x_2, \ldots, x_n$ abhängt, beschreibt die partielle Ableitung
+\begin{equation}
+    \frac{\partial f}{\partial x_i}
+\end{equation}
+die Änderungsrate von $f$ bezüglich $x_i$, während alle anderen Variablen konstant gehalten werden.
+Partielle Ableitungen sind die Grundlage der mehrdimensionalen Differentialrechnung und bilden
+das mathematische Fundament für Optimierungsverfahren im maschinellen Lernen.
+
+\subsection{Kettenregel}
+
+Die Kettenregel beschreibt, wie die Ableitung einer zusammengesetzten Funktion berechnet wird.
+Sind $f$ und $g$ differenzierbare Funktionen mit $h(x) = f(g(x))$, so gilt:
+\begin{equation}
+    \frac{\mathrm{d}h}{\mathrm{d}x} = \frac{\mathrm{d}f}{\mathrm{d}g} \cdot \frac{\mathrm{d}g}{\mathrm{d}x}
+\end{equation}
+
+\subsection{Gradient}
+
+Der Gradient einer skalaren Funktion $f : \mathbb{R}^n \to \mathbb{R}$ ist der Vektor aller
+partiellen Ableitungen:
+\begin{equation}
+    \nabla f(\mathbf{x}) =
+    \begin{pmatrix}
+        \dfrac{\partial f}{\partial x_1} \\[6pt]
+        \vdots \\[2pt]
+        \dfrac{\partial f}{\partial x_n}
+    \end{pmatrix}
+\end{equation}
+Er zeigt in die Richtung des steilsten Anstiegs von $f$ am Punkt $\mathbf{x}$.
+
+\subsection{Jacobi-Matrix}
+
+Die Jacobi-Matrix verallgemeinert den Gradienten auf Funktionen mit Vektoren.
+Gegeben eine Funktion $\mathbf{f} : \mathbb{R}^n \to \mathbb{R}^m$, die einen Eingangsvektor
+$\mathbf{x} \in \mathbb{R}^n$ auf einen Ausgangsvektor $\mathbf{f}(\mathbf{x}) \in \mathbb{R}^m$ abbildet,
+ist die Jacobi-Matrix $\mathbf{J} \in \mathbb{R}^{m \times n}$ definiert als:
+\begin{equation}
+    \mathbf{J} = \frac{\partial \mathbf{f}}{\partial \mathbf{x}} =
+    \begin{pmatrix}
+        \dfrac{\partial f_1}{\partial x_1} & \cdots & \dfrac{\partial f_1}{\partial x_n} \\[8pt]
+        \vdots & \ddots & \vdots \\[4pt]
+        \dfrac{\partial f_m}{\partial x_1} & \cdots & \dfrac{\partial f_m}{\partial x_n}
+    \end{pmatrix}.
+\end{equation}
+Das Element $J_{ij} = \frac{\partial f_i}{\partial x_j}$ gibt an, wie stark sich die $i$-te
+Ausgabekomponente ändert, wenn die $j$-te Eingabekomponente variiert wird.
+
+Für den Spezialfall $m = 1$ reduziert sich die Jacobi-Matrix zum transponierten Gradienten:
+$\mathbf{J} = \nabla f^\top$.
+
+% -------------------------------------------------------------------------
+
+\section{Grundlagen des Maschinellen Lernens}
+
+\subsection{Datenvorbereitung}
+
+Bevor ein Modell trainiert werden kann, müssen die Rohdaten in eine geeignete Form gebracht werden.
+Dieser Schritt wird als Datenvorbereitung bezeichnet und umfasst mehrere Teilaufgaben.
+
+Zunächst werden fehlende Werte behandelt, etwa durch Entfernen betroffener Einträge oder durch
+das Einsetzen von statistischen Kennzahlen wie dem Mittelwert.
+Anschließend erfolgt häufig eine Normalisierung oder Standardisierung der Eingabemerkmale,
+damit numerisch sehr unterschiedliche Größen den Trainingsprozess nicht verschlechtern.
+Bei der Standardisierung wird jedes Merkmal $x$ transformiert zu
+\begin{equation}
+    x' = \frac{x - \mu}{\sigma},
+\end{equation}
+wobei $\mu$ der Mittelwert und $\sigma$ die Standardabweichung des jeweiligen Merkmals sind.
+
+Schließlich wird der Datensatz in mindestens zwei disjunkte Teilmengen aufgeteilt:
+einen Trainings- und einen Testdatensatz. Optional wird ein dritter Validierungsdatensatz
+abgetrennt, der zur Hyperparameterauswahl während des Trainings genutzt wird.
+
+\subsection{Regression}
+
+Regression bezeichnet statistische Methoden zur Modellierung der Beziehung zwischen einer Zielgröße
+und einer oder mehreren unabhängigen Merkmalen.
+Das einfachste Modell ist die lineare Regression, die eine lineare Abbildung von der
+Eingabe $\mathbf{x} \in \mathbb{R}^n$ auf eine vorhergesagte Ausgabe $\hat{y} \in \mathbb{R}$ annimmt:
+\begin{equation}
+    \hat{y} = \mathbf{w}^\top \mathbf{x} + b,
+\end{equation}
+wobei $\mathbf{w}$ der Gewichtsvektor und $b$ der Bias-Term sind.
+
+Die Qualität der Vorhersage wird durch eine Verlustfunktion $\mathcal{L}$ gemessen.
+Das Ziel des Lernalgorithmus ist es, die Parameter $\mathbf{w}$ und $b$ so zu wählen, dass
+$\mathcal{L}$ minimiert wird.
+
+\subsection{Neuronale Netze}
+
+Ein künstliches neuronales Netz besteht aus mehreren hintereinandergeschalteten Schichten
+von sog. Neuronen. Jedes Neuron berechnet eine gewichtete Summe seiner Eingaben und wendet
+darauf eine nichtlineare Aktivierungsfunktion $\sigma$ an:
+\begin{equation}
+    a = \sigma\!\left(\mathbf{w}^\top \mathbf{x} + b\right).
+\end{equation}
+
+Eine Schicht transformiert einen Eingangsvektor $\mathbf{x}$ zu einem Ausgangsvektor $\mathbf{a}$
+mittels einer Gewichtsmatrix $\mathbf{W}$ und eines Biasvektors $\mathbf{b}$:
+\begin{equation}
+    \mathbf{a} = \sigma\!\left(\mathbf{W}\mathbf{x} + \mathbf{b}\right).
+\end{equation}
+Durch das Hintereinanderschalten mehrerer solcher Schichten entsteht ein
+\textit{tiefes} Netz (\textit{Deep Neural Network}), das in der Lage ist, hochgradig
+nichtlineare Zusammenhänge zu erlernen.
+Das gesamte Netz realisiert damit eine parametrisierte Funktion
+$f_\theta : \mathbb{R}^n \to \mathbb{R}^m$, deren Parameter $\theta = \{\mathbf{W}^{*}, \mathbf{b}^{*}\}$
+durch Training bestimmt werden.
+
+\subsection{Backpropagation}
+
+Der Algorithmus zur Berechnung der Gradienten in neuronalen Netzen wird als
+Backpropagation bezeichnet. Er wendet die Kettenregel der Differentialrechnung rekursiv an,
+um die partiellen Ableitungen der Verlustfunktion $\mathcal{L}$ nach allen Netzwerkparametern
+effizient zu berechnen.
+
+Sei $\mathbf{a}^{(l)}$ die Aktivierung der $l$-ten Schicht und $\mathbf{z}^{(l)} = \mathbf{W}^{(l)}\mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}$
+die zugehörige Voraktivierung. Der sogenannte Fehlerterm (Delta) der Schicht $l$ ist definiert als
+\begin{equation}
+    \boldsymbol{\delta}^{(l)} = \frac{\partial \mathcal{L}}{\partial \mathbf{z}^{(l)}}.
+\end{equation}
+Mithilfe der Kettenregel lässt er sich aus dem Fehlerterm der nachfolgenden Schicht $l+1$
+rückwärts propagieren:
+\begin{equation}
+    \boldsymbol{\delta}^{(l)} =
+    \left(\mathbf{W}^{(l+1)}\right)^\top \boldsymbol{\delta}^{(l+1)} \odot \sigma'\!\left(\mathbf{z}^{(l)}\right),
+\end{equation}
+wobei $\odot$ das elementweise Produkt bezeichnet.
+Die Gradienten nach den Gewichten ergeben sich dann zu
+$\frac{\partial \mathcal{L}}{\partial \mathbf{W}^{(l)}} = \boldsymbol{\delta}^{(l)} \left(\mathbf{a}^{(l-1)}\right)^\top$.
+
+In der Praxis wird Backpropagation mit einem Gradientenabstiegsverfahren kombiniert.
+Beim stochastischen Gradientenabstieg (\textit{Stochastic Gradient Descent}, SGD) werden
+die Parameter nach jedem Mini-Batch aktualisiert:
+\begin{equation}
+    \theta \leftarrow \theta - \eta \, \nabla_\theta \mathcal{L},
+\end{equation}
+wobei $\eta > 0$ die Lernrate ist.
+// TODO: Fact-Check Formeln
