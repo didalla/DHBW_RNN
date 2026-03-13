@@ -2,7 +2,7 @@
 
 \section{Gradienten Clipping}
 
-Ein pragmatischer und weit verbreiteter Ansatz zur Lösung des Problems der explodierenden Gradienten ist \textit{Gradienten-Beschneidung} (\textit{Gradient Clipping}). Wie von Pascanu et al.\ \autocite{Pascanu2013} detailliert analysiert, kann der Gradient während des Trainings von rekurrenten Netzwerken durch BPTT exponentiell anwachsen. Um die daraus resultierende Instabilität der Gewichtsaktualisierungen zu verhindern, wird der Gradientvektor künstlich skaliert, sobald seine Norm einen vordefinierten Schwellenwert überschreitet.
+Ein pragmatischer und weit verbreiteter Ansatz zur Lösung des Problems der explodierenden Gradienten ist \textit{Gradienten-Beschneidung} (\textit{Gradient Clipping}). Wie von Pascanu et al.\ \autocite{Pascanu2013} detailliert analysiert, kann der Gradient während des Trainings von rekurrenten Netzwerken durch \acs{BPTT} exponentiell anwachsen. Um die daraus resultierende Instabilität der Gewichtsaktualisierungen zu verhindern, wird der Gradientvektor künstlich skaliert, sobald seine Norm einen vordefinierten Schwellenwert überschreitet.
 
 Mathematisch lässt sich das Gradienten Clipping über die $\text{L}_2$-Norm des Gradienten $\mathbf{g}$ wie folgt formulieren:
 \begin{equation}
@@ -14,7 +14,7 @@ Mathematisch lässt sich das Gradienten Clipping über die $\text{L}_2$-Norm des
 \end{equation}
 wobei $c$ der gewählte Schwellenwert (Threshold) ist. Diese Methode stellt sicher, dass die Richtung des Gradienten im Parameterraum erhalten bleibt, während seine maximale Schrittweite auf einen sicheren Wert begrenzt wird.
 
-\section{LSTM}
+\section[LSTM]{\texorpdfstring{\acs{LSTM}}{LSTM}}
 
 Das \ac{LSTM} ist die bekannteste und am weitesten verbreitete Architektur zur Bewältigung des Problems der verschwindenden Gradienten. Sie wurde ursprünglich von Hochreiter und Schmidhuber \autocite{Hochreiter1997} entwickelt. Kern des Modells ist ein interner Zellzustand (Cell State), dessen Informationsfluss durch drei verschiedene Gates -- \textit{Forget Gate}, \textit{Input Gate} und \textit{Output Gate} -- reguliert wird. Dies ermöglicht einen konstanten Fehlerfluss durch die Zeit, wodurch das Netzwerk auch über lange Sequenzen hinweg stabil trainiert werden kann.
 
@@ -28,11 +28,11 @@ Die mathematische Funktionsweise einer \ac{LSTM}-Zelle in einem Zeitschritt $t$ 
     \mathbf{C}_t &= \mathbf{F}_t \odot \mathbf{C}_{t-1} + \mathbf{I}_t \odot \tilde{\mathbf{C}}_t \quad &&\text{(Zellzustand)} \\
     \mathbf{H}_t &= \mathbf{O}_t \odot \tanh(\mathbf{C}_t) \quad &&\text{(Verborgener Zustand)}
 \end{align}
-Durch das Zusammenspiel aus Input- und Forget-Gate kann das LSTM alte Informationen gezielt verlernen und neue systematisch in den globalen Zellzustand $\mathbf{C}_t$ einspeichern.
+Durch das Zusammenspiel aus Input- und Forget-Gate kann das \acs{LSTM} alte Informationen gezielt verlernen und neue systematisch in den globalen Zellzustand $\mathbf{C}_t$ einspeichern.
 
-\section{GRU}
+\section[GRU]{\texorpdfstring{\acs{GRU}}{GRU}}
 
-Die \ac{GRU} wurde von Cho et al.\ \autocite{Cho2014} als eine vereinfachte, aber leistungsstarke Alternative zum LSTM vorgestellt. Das Hauptziel der \ac{GRU} ist es ebenfalls, das Problem der verschwindenden Gradienten zu umgehen und das Erlernen weitreichender Abhängigkeiten in Sequenzen zu erleichtern, jedoch mit einer reduzierten Anzahl an Parametern.
+Die \ac{GRU} wurde von Cho et al.\ \autocite{Cho2014} als eine vereinfachte, aber leistungsstarke Alternative zum \acs{LSTM} vorgestellt. Das Hauptziel der \ac{GRU} ist es ebenfalls, das Problem der verschwindenden Gradienten zu umgehen und das Erlernen weitreichender Abhängigkeiten in Sequenzen zu erleichtern, jedoch mit einer reduzierten Anzahl an Parametern.
 
 Eine \ac{GRU} erreicht dies durch die Verwendung von zwei Steuereinheiten (Gates): dem \textit{Update Gate} und dem \textit{Reset Gate}. Diese Gates regulieren den reibungslosen Informationsfluss und entscheiden, welche Informationen beibehalten und welche verworfen werden.
 Die mathematische Umsetzung einer \ac{GRU}-Zelle im Zeitschritt $t$ für eine Eingabe $\mathbf{x}_t$ und den verborgenen Zustand $\mathbf{h}_{t-1}$ lautet wie folgt:
@@ -43,4 +43,3 @@ Die mathematische Umsetzung einer \ac{GRU}-Zelle im Zeitschritt $t$ für eine Ei
     \tilde{\mathbf{H}}_t &= \tanh(\mathbf{X}_t \mathbf{W}_{x,h} + (\mathbf{R}_t \odot \mathbf{H}_{t-1}) \mathbf{W}_{h,h} + \mathbf{b}_h) \quad &&\text{(Kandidat für verborgenen Zustand)} \\
     \mathbf{H}_t &= \mathbf{Z}_t \odot \mathbf{H}_{t-1} + (1 - \mathbf{Z}_t) \odot \tilde{\mathbf{H}}_t \quad &&\text{(Neuer verborgener Zustand)}
 \end{align}
-

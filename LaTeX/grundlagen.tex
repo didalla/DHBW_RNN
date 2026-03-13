@@ -1,10 +1,10 @@
 \chapter{Grundlagen von Rekurrenten Neuronalen Netzen}
 
 \section{Einführung in Rekurrente Neuronale Netze}
-Rekurrente Neuronale Netze (RNNs) sind eine spezielle Architektur von neuronalen Netzen, die primär für die Verarbeitung von sequenziellen Daten entwickelt wurden. Im Gegensatz zu klassischen Feedforward-Netzen, bei denen der Informationsfluss streng in eine Richtung von der Eingabe- zur Ausgabeschicht verläuft, besitzen RNNs Rückkopplungen in Form von internen Schleifen \autocite{d2l}. Diese Schleifen ermöglichen es dem Netzwerk, Informationen über vorherige Zeitschritte hinweg in einem sogenannten verborgenen Zustand (Hidden State) zu speichern. Die Grundlagen dieses Modells wurden unter anderem maßgeblich durch die Arbeiten von Elman geprägt \autocite{Elman1990}. Dadurch können RNNs zeitliche oder sequentielle Abhängigkeiten modellieren, was sie besonders nützlich für Anwendungen wie Sprachverarbeitung, Zeitreihenanalyse und maschinelle Übersetzung macht.
+Rekurrente neuronale Netze (\acs{RNN}) sind eine spezielle Architektur von neuronalen Netzen, die primär für die Verarbeitung von sequenziellen Daten entwickelt wurden. Im Gegensatz zu klassischen Feedforward-Netzen, bei denen der Informationsfluss streng in eine Richtung von der Eingabe- zur Ausgabeschicht verläuft, besitzen diese Modelle Rückkopplungen in Form von internen Schleifen \autocite{d2l}. Diese Schleifen ermöglichen es dem Netzwerk, Informationen über vorherige Zeitschritte hinweg in einem sogenannten verborgenen Zustand zu speichern. Die Grundlagen dieses Modells wurden unter anderem maßgeblich durch die Arbeiten von Elman geprägt \autocite{Elman1990}. Dadurch können \acp{RNN} zeitliche oder sequentielle Abhängigkeiten modellieren, was sie besonders nützlich für Anwendungen wie Sprachverarbeitung, Zeitreihenanalyse und maschinelle Übersetzung macht.
 
-\section{Mathematisches Modell einfacher RNNs}
-Die Funktionsweise eines einfachen RNNs lässt sich durch eine Reihe mathematischer Gleichungen beschreiben, die in jedem Zeitschritt $t$ ausgeführt werden. Die Eingabe zum Zeitpunkt $t$ sei ein Vektor $\mathbf{x}_t \in \mathbb{R}^x$. Der verborgene Zustand $\mathbf{h}_t \in \mathbb{R}^h$ wird berechnet, indem sowohl die aktuelle Eingabe als auch der vorherige verborgene Zustand $\mathbf{h}_{t-1}$ einbezogen werden. Die Gleichung lautet:
+\section[Mathematisches Modell einfacher RNN]{Mathematisches Modell einfacher \texorpdfstring{\acs{RNN}}{RNN}}
+Die Funktionsweise eines einfachen \acs{RNN} lässt sich durch eine Reihe mathematischer Gleichungen beschreiben, die in jedem Zeitschritt $t$ ausgeführt werden. Die Eingabe zum Zeitpunkt $t$ sei ein Vektor $\mathbf{x}_t \in \mathbb{R}^x$. Der verborgene Zustand $\mathbf{h}_t \in \mathbb{R}^h$ wird berechnet, indem sowohl die aktuelle Eingabe als auch der vorherige verborgene Zustand $\mathbf{h}_{t-1}$ einbezogen werden. Die Gleichung lautet:
 \begin{equation}
 \mathbf{h}_t = \sigma(\mathbf{W}_{h,x} \mathbf{x}_t + \mathbf{W}_{h,h} \mathbf{h}_{t-1} + \mathbf{b}_h)
 \end{equation}
@@ -16,10 +16,12 @@ Die Ausgabe $\mathbf{o}_t \in \mathbb{R}^o$ im Zeitschritt $t$ wird oft durch ei
 \end{equation}
 Dabei ist $\mathbf{W}_{o,h}$ die Gewichtsmatrix für die Ausgabe, $\mathbf{b}_o$ der Ausgabe-Biasvektor und $\phi$ die Ausgabe-Aktivierungsfunktion (z.\,B. Softmax für Klassifikationsaufgaben). Bemerkenswert ist, dass die Gewichtsmatrizen ($\mathbf{W}_{h,x}, \mathbf{W}_{h,h}, \mathbf{W}_{o,h}$) über alle Zeitschritte hinweg geteilt werden, was die Anzahl der zu lernenden Parameter deutlich reduziert.
 
-\section{Rückwärtspropagation in der Zeit (BPTT)}
-Das Training von RNNs erfolgt typischerweise mittels einer spezialisierten Form der Backpropagation, die als Backpropagation Through Time (BPTT) bezeichnet wird \autocite{d2l}. Die zugrundeliegende Idee der generellen Fehler-Backpropagation wurde insbesondere durch die Publikationen von Rumelhart et al. etabliert \autocite{Rumelhart1986}, während das BPTT-Verfahren von Werbos detailliert für rekurrente Netzwerke mathematisch hergeleitet und formuliert wurde \autocite{Werbos1990}. Bei BPTT wird das rekurrente Netz über die gesamte Länge der Sequenz entfaltet (unrolled). Das entfaltete Netz kann man sich als ein tiefes Feedforward-Netz vorstellen, bei dem jede Schicht einem definierten Zeitschritt entspricht. //TODO: FACT CHECK QUELLEN
+\section[Rückwärtspropagation in der Zeit (BPTT)]{Rückwärtspropagation in der Zeit (\texorpdfstring{\acs{BPTT}}{BPTT})}
+Das Training von \acs{RNN} erfolgt typischerweise mittels einer spezialisierten Form der Backpropagation, die als \acs{BPTT} bezeichnet wird \autocite{d2l}. Die zugrundeliegende Idee der generellen Fehler-Backpropagation wurde insbesondere durch die Publikationen von Rumelhart et al. etabliert \autocite{Rumelhart1986}, während das \acs{BPTT}-Verfahren von Werbos detailliert für rekurrente Netzwerke mathematisch hergeleitet und formuliert wurde \autocite{Werbos1990}. Bei \acs{BPTT} wird das rekurrente Netz über die gesamte Länge der Sequenz entfaltet (unrolled). Das entfaltete Netz kann man sich als ein tiefes Feedforward-Netz vorstellen, bei dem jede Schicht einem definierten Zeitschritt entspricht.
 
-Nachdem in einem Vorwärtsdurchlauf (Forward Pass) alle Zustände und Ausgaben berechnet wurden, wandert der Fehlergradient beim BPTT-Verfahren von den späten Zeitschritten rückwärts durch die Zeit zu den früheren Zeitschritten. 
+% TODO: Quellen und Formulierung des Abschnitts noch einmal fachlich gegenpruefen
+
+Nachdem in einem Vorwärtsdurchlauf alle Zustände und Ausgaben berechnet wurden, wandert der Fehlergradient beim \acs{BPTT}-Verfahren von den späten Zeitschritten rückwärts durch die Zeit zu den früheren Zeitschritten. 
 
 Die allgemeine Lossfunktion über eine Sequenz von Länge $T$ wird durch den Durchschnitt der Einzelfehler über alle Zeitschritte definiert:
 \begin{equation}
@@ -32,4 +34,4 @@ Die einzelnen Parameter des Netzwerks (z.\,B. $\mathbf{W}_{h,x}, \mathbf{W}_{h,h
 \frac{\partial \mathcal{L}}{\partial \mathbf{o}_t} = \frac{\partial l(\mathbf{o}_t, \mathbf{y}_t)}{T \cdot \partial \mathbf{o}_t}
 \end{equation}
 
-//TODO: Nach Depression weiter machen
+% TODO: Abschnitt weiter ausarbeiten

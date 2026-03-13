@@ -1,18 +1,16 @@
 % !TEX root =  master.tex
 \chapter{Motivation und Zielsetzung}
 
-\nocite{*}
-
 \section{Motivation}
 
-//TODO: Warum RNNs? Warum ist das Thema relevant? Limitierung der normalen Feedforward-Netze bei sequenziellen Daten, z.B. Zeitreihen
+% TODO: Warum RNNs? Warum ist das Thema relevant? Limitierung der normalen Feedforward-Netze bei sequenziellen Daten, z.B. Zeitreihen
 
 Trotz ihrer theoretischen Stärke leiden einfache \acp{RNN} in der Praxis unter dem Problem verschwindender und
-explodierender Gradienten, sobald lange Abhängigkeitsketten erlernt werden müssen. Die Entwicklung von
-\textit{Long Short-Term Memory}-Einheiten (LSTM) und \textit{Gated Recurrent Units} (GRU) hat dieses Problem
-weitgehend gelöst und den Einsatzbereich rekurrenter Architekturen erheblich erweitert.
+explodierender Gradienten, sobald lange Abhängigkeitsketten erlernt werden müssen. Architekturen wie das
+\ac{LSTM} und die \ac{GRU} haben dieses Problem weitgehend abgeschwächt und den Einsatzbereich rekurrenter
+Modelle erheblich erweitert.
 
-//TODO: Praxisbeispiele nennen, z.B. Sprachmodellierung, Zeitreihenanalyse, etc.
+% TODO: Praxisbeispiele nennen, z.B. Sprachmodellierung, Zeitreihenanalyse, etc.
 
 \section{Zielsetzung}
 
@@ -24,17 +22,17 @@ Hieraus leiten sich die folgenden Teilziele ab:
 \begin{enumerate}
     \item \textbf{Theoretische Grundlagen:} Darstellung des mathematischen Modells einfacher rekurrenter Netze,
     einschließlich der Vorwärtsberechnung und der zeitlich entfalteten Rückwärtspropagation
-    (\textit{Backpropagation Through Time}, BPTT).
+    mittels \ac{BPTT}.
 
     \item \textbf{Gradientenproblematik:} Analyse der Ursachen verschwindender und explodierender Gradienten
     sowie Diskussion der wichtigsten Gegenmaßnahmen.
 
-    \item \textbf{Erweiterte Architekturen:} Vorstellung der GRU-Architekturen als Lösungsansatz
+    \item \textbf{Erweiterte Architekturen:} Vorstellung von \ac{LSTM} und \ac{GRU} als Lösungsansätze
     für das Kurzeitgedächtnis-Problem einfacher \acp{RNN}.
 
-    \item \textbf{Anwendungsbeispiele:} Prototypische Implementierung und Evaluation eines
-    \ac{RNN}-basierten Modells an einem repräsentativen Datensatz zum Thema Aktienpreisvorhersage, um die erarbeiteten
-    Konzepte zu veranschaulichen.
+    \item \textbf{Anwendungsfelder:} Einordnung typischer Einsatzgebiete rekurrenter Netze, insbesondere in
+    der Sprachverarbeitung und Zeitreihenanalyse, um die erarbeiteten Konzepte an konkreten Problemklassen
+    zu veranschaulichen.
 
     \item \textbf{Kritische Einordnung:} Reflexion der Grenzen und Stärken rekurrenter Netze im Vergleich
     zu modernen Alternativen wie \textit{Transformer}-Architekturen.

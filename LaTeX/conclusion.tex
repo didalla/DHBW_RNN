@@ -1,15 +1,12 @@
 % !TEX root =  master.tex
 \chapter{Zusammenfassung}
 
-\nocite{*}
-
-Dieses Kapitel enthält die Zusammenfassung der Arbeit mit Fazit und Ausblick.
-
 \section{Fazit}
 
-...
+Die Arbeit hat gezeigt, dass \acp{RNN} eine leistungsfähige Modellklasse für die Verarbeitung sequenzieller Daten darstellen. Ihr zentraler Vorteil liegt darin, dass frühere Eingaben über verborgene Zustände in die Verarbeitung späterer Zeitschritte einbezogen werden können. Gleichzeitig wurde deutlich, dass einfache rekurrente Architekturen beim Training auf langen Sequenzen unter verschwindenden und explodierenden Gradienten leiden.
+
+Zur Bewältigung dieser Schwierigkeiten wurden mit Gradienten-Clipping, \ac{LSTM} und \ac{GRU} wesentliche Lösungsansätze herausgearbeitet. Insbesondere \ac{LSTM} und \ac{GRU} erweitern das Grundmodell um Kontrollmechanismen, die den Informationsfluss stabilisieren und dadurch das Lernen längerer Abhängigkeiten verbessern. Damit bleibt der Einsatz rekurrenter Netze trotz moderner Alternativen in vielen Anwendungsbereichen weiterhin fachlich relevant.
 
 \section{Ausblick}
 
-...
-
+Für zukünftige Arbeiten bietet sich eine weiterführende Gegenüberstellung rekurrenter Architekturen mit modernen sequenziellen Modellen wie Transformern an. Darüber hinaus wäre eine empirische Evaluation auf realen Datensätzen sinnvoll, um die theoretisch beschriebenen Unterschiede zwischen einfachen \acp{RNN}, \ac{LSTM} und \ac{GRU} anhand von Trainingsstabilität, Modellgüte und Rechenaufwand systematisch zu vergleichen.
